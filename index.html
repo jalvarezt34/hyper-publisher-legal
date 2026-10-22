@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>Política de privacidad | Señal Residual Publisher</title><style>
+:root {color-scheme:light;--ink:#182a37;--bg:#f6f9fc;--blue:#19688b;--line:#d6e3eb;--muted:#526572;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#0f2532;color:white;padding:2.2rem max(1.5rem,calc((100vw - 920px)/2));}header p{color:#c9e1ed;margin:.3rem 0}header h1{font-size:2rem;margin:0}nav{display:flex;flex-wrap:wrap;gap:1.3rem;padding:.9rem max(1.5rem,calc((100vw - 920px)/2));background:white;border-bottom:1px solid var(--line)}nav a{font-weight:600}main{max-width:920px;margin:1.8rem auto 4rem;padding:0 1.5rem}article{background:white;border:1px solid var(--line);border-radius:14px;padding:2rem}article h1{display:none}article h2{border-top:1px solid var(--line);margin:2.5rem 0 .6rem;padding-top:1.5rem;font-size:1.4rem}article h3{margin:1.5rem 0 .5rem}a{color:var(--blue);overflow-wrap:anywhere}code{background:#edf3f6;border-radius:4px;padding:.08rem .3rem;overflow-wrap:anywhere}ul,ol{padding-left:1.5rem}li{margin:.4rem 0}blockquote{border-left:4px solid var(--blue);padding:.25rem 1rem;background:#eef5f8;margin:1rem 0}.sub{color:var(--muted)}footer{text-align:center;color:var(--muted);padding:0 1rem 2rem;font-size:.9rem}@media(max-width:640px){article{padding:1.1rem}header h1{font-size:1.55rem}body{font-size:15px}}
+</style></head>
+<body><header><h1>Señal Residual Publisher</h1><p>Documentación legal pública</p></header><nav aria-label="Documentos legales"><a href="./">Política de privacidad</a><a href="./eliminacion-datos.html">Eliminación de datos</a></nav>
+<main><p class="sub">Basada en la versión local 1.2.0. Adaptación para publicación web estática; revisa que esté sincronizada con la aplicación.</p><article><h1>Política de privacidad de Señal Residual Publisher</h1>
+<p>Versión: 1.2.0</p>
+<h2>1. Identificación y alcance</h2>
+<p><strong>Señal Residual Publisher</strong> («Publisher») es una aplicación de escritorio y servidor web local (<code>127.0.0.1</code>) operada por un único usuario en su propio equipo para revisar borradores audiovisuales, aprobar su distribución y publicarlos o programarlos en sus canales y páginas oficiales. Publisher no ofrece un servicio público de gestión de videos: su aplicación, sus credenciales y su base de datos funcionan localmente. Esta política también se publica en una página web estática para consulta pública y requisitos de los proveedores. La página pública no da acceso a la aplicación ni a los datos almacenados localmente.</p>
+<p><strong>Contacto del responsable de la instalación:</strong> <code>jalvarezt34@gmail.com</code> (configurado en <code>legal.ownerContact</code> dentro de <code>config/publisher.json</code>).</p>
+<h2>2. Uso de los servicios de la API de YouTube</h2>
+<p>Señal Residual Publisher utiliza los <strong>servicios de la API de YouTube</strong> (<em>YouTube API Services</em>, YouTube Data API v3) para conectar el canal autorizado del usuario, verificar su identidad, consultar las categorías de video asignables, subir videos y miniaturas aprobados explícitamente por el usuario y consultar el estado de carga, procesamiento y privacidad de dichos envíos.</p>
+<p>El tratamiento de datos por parte de Google se rige por la <strong>Política de Privacidad de Google</strong>, disponible en:</p>
+<ul>
+<li><a href="http://www.google.com/policies/privacy" rel="noreferrer noopener" target="_blank">http://www.google.com/policies/privacy</a></li>
+<li><a href="https://www.google.com/policies/privacy" rel="noreferrer noopener" target="_blank">https://www.google.com/policies/privacy</a></li>
+</ul>
+<h2>3. Datos de YouTube a los que se accede, qué se guarda, cómo se usan y con quién se comparten</h2>
+<p>Publisher solicita únicamente los alcances OAuth <code>&lt;a href=&quot;https://www.googleapis.com/auth/youtube.upload&quot; rel=&quot;noreferrer noopener&quot; target=&quot;_blank&quot;&gt;https://www.googleapis.com/auth/youtube.upload&lt;/a&gt;</code> y <code>&lt;a href=&quot;https://www.googleapis.com/auth/youtube.readonly&quot; rel=&quot;noreferrer noopener&quot; target=&quot;_blank&quot;&gt;https://www.googleapis.com/auth/youtube.readonly&lt;/a&gt;</code>. No solicita alcances de modificación general (<code>youtube</code> ni <code>youtube.force-ssl</code>).</p>
+<h3>3.1. Datos a los que accede y que almacena localmente</h3>
+<p>Cuando la compuerta de conexión de YouTube está activa y el usuario autoriza su canal, Publisher accede y almacena localmente en la tabla de inventario <code>ProviderApiData</code> (o en las columnas designadas del inventario local en SQLite):</p>
+<ol>
+<li><strong>Identidad del canal (<code>channels.list?mine=true</code>):</strong> identificador (<code>channelId</code>) y título/nombre visible del canal autorizado.</li>
+<li><strong>Envíos de video (<code>videos.insert</code> y <code>thumbnails.set</code>):</strong> identificador remoto del video (<code>videoId</code>) y URL confirmada del video subido.</li>
+<li><strong>Estado remoto observado (<code>videos.list</code>):</strong> estado de carga (<code>uploadStatus</code>), estado y progreso de procesamiento (<code>processingStatus</code>, <code>processingFailureReason</code>), motivos de fallo o rechazo (<code>failureReason</code>, <code>rejectionReason</code>), privacidad observada (<code>privacyStatus</code>), fecha programada (<code>publishAt</code>) y designación <em>made for kids</em> observada (<code>selfDeclaredMadeForKids</code>).</li>
+<li><strong>Categorías (<code>videoCategories.list</code>, región <code>CL</code>):</strong> catálogo en caché de categorías asignables y la selección de <code>categoryId</code> asociada a cada revisión mediante referencia opaca.</li>
+</ol>
+<p>Los registros de auditoría (<code>AuditEvent</code>) de proveedores reales almacenan únicamente referencias locales opacas a <code>ProviderApiData</code>, nunca copias de los valores devueltos por la API.</p>
+<h3>3.2. Credenciales y puntos de control sensibles</h3>
+<ul>
+<li>El <code>client_secret</code> OAuth, el <code>refresh_token</code> de Google y la URI de sesión de carga reanudable (<em>resumable upload session URI</em>) se almacenan exclusivamente en el <strong>Credential Manager de Windows</strong> mediante referencias opacas.</li>
+<li>El <code>access_token</code> vive únicamente en la memoria del proceso mientras está vigente y nunca se escribe en disco.</li>
+<li>Ningún token, secreto ni URI de sesión se guarda en texto plano en SQLite, en archivos de configuración, en paquetes de release ni en los logs de la aplicación.</li>
+</ul>
+<h3>3.3. Uso de los datos</h3>
+<p>Los datos de la API de YouTube se utilizan exclusivamente en este equipo para:</p>
+<ul>
+<li>mostrar al usuario qué canal está conectado y comprobar antes de cada envío que la identidad del canal no haya cambiado;</li>
+<li>permitir elegir una categoría asignable de YouTube en la revisión del borrador;</li>
+<li>ejecutar la subida reanudable del archivo MP4 y, cuando corresponda, de su miniatura, únicamente tras la aprobación humana explícita de la revisión exacta;</li>
+<li>mostrar el estado real del procesamiento y la privacidad observada frente a la esperada, y evitar envíos duplicados ante cortes o reinicios.</li>
+</ul>
+<h3>3.4. Compartición de datos, publicidad y terceros</h3>
+<ul>
+<li>Señal Residual Publisher <strong>no comparte, vende, alquila ni transfiere</strong> datos de la API de YouTube ni datos personales a ninguna persona o entidad externa.</li>
+<li>Las únicas comunicaciones de red con datos de YouTube ocurren directamente entre el equipo del usuario y los puntos finales oficiales de Google/YouTube (<code>accounts.google.com</code>, <code>oauth2.googleapis.com</code> y <code>www.googleapis.com</code>).</li>
+<li>Publisher <strong>no incluye publicidad</strong> ni carga contenido, scripts, analíticas o rastreadores de terceros.</li>
+</ul>
+<h2>4. Almacenamiento local, cookies y tecnologías similares</h2>
+<p>La interfaz web local se sirve únicamente en <code>&lt;a href=&quot;http://127.0.0.1:&lt;puerto&gt;/&quot; rel=&quot;noreferrer noopener&quot; target=&quot;_blank&quot;&gt;http://127.0.0.1:&lt;puerto&gt;&lt;/a&gt;</code>:</p>
+<ul>
+<li><strong>No utiliza cookies de seguimiento, analítica ni publicidad.</strong></li>
+<li>Utiliza únicamente un token CSRF en memoria de la sesión de la interfaz local (enviado en la cabecera <code>x-csrf-token</code>) y validación de cabeceras <code>Origin</code>/<code>Host</code> para impedir peticiones falsificadas desde otros sitios abiertos en el navegador.</li>
+</ul>
+<h2>5. Retención y borrado de datos de la API de YouTube</h2>
+<p>De conformidad con las Políticas de los Servicios de la API de YouTube (sección III.E.4):</p>
+<ol>
+<li><strong>Vigencia máxima de 30 días:</strong> mientras la autorización del canal siga activa, Publisher ejecuta un mantenimiento diario que refresca únicamente los datos de API necesarios para operaciones activas (canal conectado, trabajos aún no terminales y categorías en uso) y <strong>elimina los datos de API con más de 30 días de antigüedad</strong> desde su obtención.</li>
+<li><strong>Borrado tras desconexión, revocación o solicitud (máximo 7 días):</strong> cuando el usuario desconecta el canal en Publisher, cuando solicita el borrado desde la interfaz o cuando Publisher detecta que la autorización fue revocada en Google (<code>invalid_grant</code>, comprobado al menos una vez al día), Publisher <strong>elimina de inmediato —y en todo caso dentro de un plazo máximo de 7 días— todos los datos de la API de YouTube</strong> almacenados localmente, junto con los tokens y puntos de control del almacén seguro.</li>
+<li><strong>Hechos locales y <em>tombstones</em>:</strong> tras purgar los datos de API de un envío, Publisher conserva únicamente hechos locales propios (hashes SHA-256 de archivos y revisiones, marcas de tiempo locales, aprobaciones, aceptaciones legales y un registro <em>tombstone</em> local sin identificadores ni valores de YouTube) para mantener la trazabilidad interna e impedir que un mismo video se reenvíe por accidente.</li>
+</ol>
+<h2>6. Cómo solicitar el borrado de datos en la interfaz</h2>
+<p>En cualquier momento, el usuario puede pulsar el botón visible <strong>«Borrar datos de YouTube»</strong> en la sección de cuentas/datos de la interfaz local de Publisher (o desconectar la cuenta). Esta acción purga de inmediato todos los registros de <code>ProviderApiData</code> y limpia los valores remotos de YouTube almacenados en este equipo.</p>
+<blockquote>
+<p><strong>Importante:</strong> borrar los datos locales en Señal Residual Publisher <strong>no borra los videos ni los datos alojados en YouTube</strong>. Para modificar o eliminar videos, miniaturas o programaciones en la plataforma, utilice directamente <strong>YouTube Studio</strong> (<code>&lt;a href=&quot;https://studio.youtube.com/&quot; rel=&quot;noreferrer noopener&quot; target=&quot;_blank&quot;&gt;https://studio.youtube.com&lt;/a&gt;</code>).</p>
+</blockquote>
+<h2>7. Cómo revocar el acceso a los datos</h2>
+<p>Además de usar la opción de desconexión o borrado dentro de Publisher, el usuario puede revisar y revocar el acceso de Señal Residual Publisher a sus datos de Google y YouTube en cualquier momento desde la página de permisos de seguridad de Google:</p>
+<ul>
+<li><a href="https://security.google.com/settings/security/permissions" rel="noreferrer noopener" target="_blank">https://security.google.com/settings/security/permissions</a></li>
+</ul>
+<h2>8. Uso de la plataforma de Meta (Facebook)</h2>
+<p>Cuando el usuario activa y autoriza la integración con Facebook, Señal Residual Publisher utiliza la <strong>Graph API de Meta</strong> (versión configurable en <code>facebook.graphApiVersion</code>; <code>v26.0</code> por defecto) para conectar una <strong>Página de Facebook</strong> que el usuario administra, verificar su identidad, subir y publicar los videos y Reels aprobados explícitamente por el usuario y consultar el estado de dichas publicaciones. Publisher <strong>no permite publicar en perfiles personales</strong>: solo en una Página devuelta por Meta donde el usuario puede crear contenido (tarea <code>CREATE_CONTENT</code> o su equivalente <code>PROFILE_PLUS_CREATE_CONTENT</code>), ya sea que la administre directamente o a través de un portfolio empresarial.</p>
+<p>El tratamiento de datos por parte de Meta se rige por los <strong>Términos de la Plataforma de Meta</strong> y por la política de datos de Meta:</p>
+<ul>
+<li><a href="https://developers.facebook.com/terms/" rel="noreferrer noopener" target="_blank">https://developers.facebook.com/terms/</a></li>
+<li><a href="https://www.facebook.com/about/privacy" rel="noreferrer noopener" target="_blank">https://www.facebook.com/about/privacy</a></li>
+</ul>
+<h2>9. Datos de Meta a los que se accede, qué se guarda, cómo se usan y con quién se comparten</h2>
+<p>Publisher solicita únicamente los permisos <code>pages_show_list</code>, <code>pages_read_engagement</code>, <code>pages_manage_posts</code> y <code>business_management</code>. No solicita ningún otro permiso.</p>
+<p>El permiso <code>business_management</code> se usa <strong>exclusivamente para descubrir y obtener la Página que el usuario administra a través de un portfolio empresarial</strong>: sin él, Meta puede omitir una Página administrada mediante un portfolio empresarial. Publisher <strong>no usa la API de Business Manager</strong>: no lee, crea ni modifica cuentas publicitarias, catálogos, portfolios ni otros activos de negocio, y no almacena datos del portfolio empresarial; de lo que Meta devuelve solo conserva el identificador y el nombre de la Página elegida.</p>
+<h3>9.1. Datos a los que accede y que almacena localmente</h3>
+<ol>
+<li><strong>Páginas administradas, directamente o mediante un portfolio empresarial, y sus tareas (<code>/{user-id}/accounts</code>):</strong> solo mientras dura la conexión (hasta 10 minutos, en memoria), para que el usuario elija la Página; de las no elegidas no se conserva nada.</li>
+<li><strong>Permisos concedidos (<code>/{user-id}/permissions</code>):</strong> para comprobar que los cuatro permisos requeridos fueron concedidos; se conserva solo la lista de permisos efectivos de la cuenta.</li>
+<li><strong>Identidad de la Página (<code>/{page-id}</code>):</strong> identificador (<code>pageId</code>) y nombre de la Página autorizada, guardados localmente en <code>ProviderApiData</code>.</li>
+<li><strong>Publicaciones (<code>/{page-id}/video_reels</code>, <code>/{page-id}/videos</code>):</strong> identificador remoto del video o Reel, y el estado de publicación observado (estado de carga y procesamiento; fecha de creación del video).</li>
+</ol>
+<p>Los registros de auditoría (<code>AuditEvent</code>) de proveedores reales almacenan únicamente referencias locales opacas a <code>ProviderApiData</code>, nunca copias de los valores devueltos por la API.</p>
+<h3>9.2. Credenciales y puntos de control sensibles</h3>
+<ul>
+<li>El <em>App Secret</em> de la app de Meta, el <strong>token de Página</strong> y el <strong>token de usuario de larga duración</strong> (vigencia aproximada de 60 días, necesario solo para subir videos de Página con la API de carga reanudable) se almacenan exclusivamente en el <strong>Credential Manager de Windows</strong> mediante referencias opacas, un secreto por entrada.</li>
+<li>El identificador de la sesión de carga, el <em>handle</em> del archivo subido y las marcas de publicación son puntos de control sensibles y se guardan igual, nunca en SQLite.</li>
+<li>Ningún token, secreto ni identificador de sesión se guarda en texto plano en SQLite, en archivos de configuración, en paquetes de release ni en los logs de la aplicación.</li>
+</ul>
+<h3>9.3. Uso de los datos</h3>
+<p>Los datos de Meta se utilizan exclusivamente en este equipo para:</p>
+<ul>
+<li>mostrar al usuario qué Página está conectada y comprobar antes de cada envío que su identidad no haya cambiado;</li>
+<li>subir y publicar el video o Reel únicamente tras la aprobación humana explícita de la revisión exacta;</li>
+<li>mostrar el estado de la publicación y evitar envíos duplicados ante cortes o reinicios.</li>
+</ul>
+<h3>9.4. Compartición de datos, publicidad y terceros</h3>
+<ul>
+<li>Señal Residual Publisher <strong>no comparte, vende, alquila ni transfiere</strong> datos de la plataforma de Meta ni datos personales a ninguna persona o entidad externa.</li>
+<li>Las únicas comunicaciones de red con datos de Meta ocurren directamente entre el equipo del usuario y los puntos finales oficiales de Meta (<code>www.facebook.com</code>, <code>graph.facebook.com</code>, <code>graph-video.facebook.com</code> y <code>rupload.facebook.com</code>).</li>
+<li>Publisher <strong>no incluye publicidad</strong> ni carga contenido, scripts, analíticas o rastreadores de terceros.</li>
+</ul>
+<h2>10. Retención y borrado de datos de Meta</h2>
+<p>Se aplica el mismo mecanismo que para YouTube (sección 5), conforme a las obligaciones de actualizar o eliminar los datos de la plataforma sin demora, cuando dejen de ser necesarios o cuando el usuario lo solicite:</p>
+<ol>
+<li><strong>Vigencia máxima de 30 días:</strong> mientras la autorización siga activa, el mantenimiento diario refresca los datos de API necesarios para operaciones activas y <strong>elimina los datos de API con más de 30 días de antigüedad</strong>.</li>
+<li><strong>Borrado tras desconexión, revocación o solicitud (máximo 7 días):</strong> al desconectar la Página, al solicitar el borrado en la interfaz o al detectar que Meta revocó el acceso (comprobado al menos una vez al día), Publisher <strong>elimina de inmediato —y en todo caso dentro de un plazo máximo de 7 días— todos los datos de la API de Meta</strong> almacenados localmente, junto con los tokens y puntos de control del almacén seguro. Al desconectar, además, Publisher solicita a Meta revocar los permisos concedidos.</li>
+<li><strong>Hechos locales y <em>tombstones</em>:</strong> se conservan únicamente hechos locales propios (hashes SHA-256, marcas de tiempo, aprobaciones, aceptaciones legales y un registro <em>tombstone</em> sin identificadores ni valores de Meta) para mantener la trazabilidad interna e impedir que un mismo video se reenvíe por accidente.</li>
+</ol>
+<h2>11. Cómo solicitar el borrado de datos de Facebook</h2>
+<p>En cualquier momento, el usuario puede pulsar el botón visible <strong>«Borrar datos de Facebook»</strong> en la sección de cuentas/datos de la interfaz local de Publisher (o desconectar la cuenta). Esta acción purga de inmediato todos los registros de <code>ProviderApiData</code> de Facebook y limpia los valores remotos almacenados en este equipo. El responsable de la instalación (contacto en la sección 1) atiende también cualquier solicitud de borrado recibida de Meta o de una persona usuaria.</p>
+<blockquote>
+<p><strong>Importante:</strong> borrar los datos locales en Señal Residual Publisher <strong>no borra los videos, Reels ni publicaciones de la Página alojados en Facebook</strong>. Para modificarlos o eliminarlos, utilice directamente Facebook.</p>
+</blockquote>
+<h2>12. Cómo revocar el acceso de Publisher a su cuenta de Facebook</h2>
+<p>Además de la opción de desconexión dentro de Publisher, puede quitar la app en Facebook desde <strong>Configuración y privacidad › Configuración › Apps y sitios web</strong>, donde también puede enviar una solicitud de eliminación de sus datos.</p>
+</article></main><footer>Señal Residual Publisher · Documentación legal</footer></body></html>

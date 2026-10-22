@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>Eliminación de datos | Señal Residual Publisher</title><style>
+:root {color-scheme:light;--ink:#182a37;--bg:#f6f9fc;--blue:#19688b;--line:#d6e3eb;--muted:#526572;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#0f2532;color:white;padding:2.2rem max(1.5rem,calc((100vw - 920px)/2));}header p{color:#c9e1ed;margin:.3rem 0}header h1{font-size:2rem;margin:0}nav{display:flex;flex-wrap:wrap;gap:1.3rem;padding:.9rem max(1.5rem,calc((100vw - 920px)/2));background:white;border-bottom:1px solid var(--line)}nav a{font-weight:600}main{max-width:920px;margin:1.8rem auto 4rem;padding:0 1.5rem}article{background:white;border:1px solid var(--line);border-radius:14px;padding:2rem}article h1{display:none}article h2{border-top:1px solid var(--line);margin:2.5rem 0 .6rem;padding-top:1.5rem;font-size:1.4rem}article h3{margin:1.5rem 0 .5rem}a{color:var(--blue);overflow-wrap:anywhere}code{background:#edf3f6;border-radius:4px;padding:.08rem .3rem;overflow-wrap:anywhere}ul,ol{padding-left:1.5rem}li{margin:.4rem 0}blockquote{border-left:4px solid var(--blue);padding:.25rem 1rem;background:#eef5f8;margin:1rem 0}.sub{color:var(--muted)}footer{text-align:center;color:var(--muted);padding:0 1rem 2rem;font-size:.9rem}@media(max-width:640px){article{padding:1.1rem}header h1{font-size:1.55rem}body{font-size:15px}}
+</style></head>
+<body><header><h1>Señal Residual Publisher</h1><p>Documentación legal pública</p></header><nav aria-label="Documentos legales"><a href="./">Política de privacidad</a><a href="./eliminacion-datos.html">Eliminación de datos</a></nav>
+<main><p class="sub">Instrucciones extraídas de la política de privacidad existente.</p><article><h1>Eliminación de datos de Señal Residual Publisher</h1>
+<h2>Datos de YouTube: conservación y eliminación</h2>
+<p>De conformidad con las Políticas de los Servicios de la API de YouTube (sección III.E.4):</p>
+<ol>
+<li><strong>Vigencia máxima de 30 días:</strong> mientras la autorización del canal siga activa, Publisher ejecuta un mantenimiento diario que refresca únicamente los datos de API necesarios para operaciones activas (canal conectado, trabajos aún no terminales y categorías en uso) y <strong>elimina los datos de API con más de 30 días de antigüedad</strong> desde su obtención.</li>
+<li><strong>Borrado tras desconexión, revocación o solicitud (máximo 7 días):</strong> cuando el usuario desconecta el canal en Publisher, cuando solicita el borrado desde la interfaz o cuando Publisher detecta que la autorización fue revocada en Google (<code>invalid_grant</code>, comprobado al menos una vez al día), Publisher <strong>elimina de inmediato —y en todo caso dentro de un plazo máximo de 7 días— todos los datos de la API de YouTube</strong> almacenados localmente, junto con los tokens y puntos de control del almacén seguro.</li>
+<li><strong>Hechos locales y <em>tombstones</em>:</strong> tras purgar los datos de API de un envío, Publisher conserva únicamente hechos locales propios (hashes SHA-256 de archivos y revisiones, marcas de tiempo locales, aprobaciones, aceptaciones legales y un registro <em>tombstone</em> local sin identificadores ni valores de YouTube) para mantener la trazabilidad interna e impedir que un mismo video se reenvíe por accidente.</li>
+</ol>
+<h2>6. Cómo solicitar el borrado de datos en la interfaz</h2>
+<p>En cualquier momento, el usuario puede pulsar el botón visible <strong>«Borrar datos de YouTube»</strong> en la sección de cuentas/datos de la interfaz local de Publisher (o desconectar la cuenta). Esta acción purga de inmediato todos los registros de <code>ProviderApiData</code> y limpia los valores remotos de YouTube almacenados en este equipo.</p>
+<blockquote>
+<p><strong>Importante:</strong> borrar los datos locales en Señal Residual Publisher <strong>no borra los videos ni los datos alojados en YouTube</strong>. Para modificar o eliminar videos, miniaturas o programaciones en la plataforma, utilice directamente <strong>YouTube Studio</strong> (<code>&lt;a href=&quot;https://studio.youtube.com/&quot; rel=&quot;noreferrer noopener&quot; target=&quot;_blank&quot;&gt;https://studio.youtube.com&lt;/a&gt;</code>).</p>
+</blockquote>
+<h2>7. Cómo revocar el acceso a los datos</h2>
+<p>Además de usar la opción de desconexión o borrado dentro de Publisher, el usuario puede revisar y revocar el acceso de Señal Residual Publisher a sus datos de Google y YouTube en cualquier momento desde la página de permisos de seguridad de Google:</p>
+<ul>
+<li><a href="https://security.google.com/settings/security/permissions" rel="noreferrer noopener" target="_blank">https://security.google.com/settings/security/permissions</a></li>
+</ul>
+<h2>Datos de Meta: conservación y eliminación</h2>
+<p>Se aplica el mismo mecanismo que para YouTube (sección 5), conforme a las obligaciones de actualizar o eliminar los datos de la plataforma sin demora, cuando dejen de ser necesarios o cuando el usuario lo solicite:</p>
+<ol>
+<li><strong>Vigencia máxima de 30 días:</strong> mientras la autorización siga activa, el mantenimiento diario refresca los datos de API necesarios para operaciones activas y <strong>elimina los datos de API con más de 30 días de antigüedad</strong>.</li>
+<li><strong>Borrado tras desconexión, revocación o solicitud (máximo 7 días):</strong> al desconectar la Página, al solicitar el borrado en la interfaz o al detectar que Meta revocó el acceso (comprobado al menos una vez al día), Publisher <strong>elimina de inmediato —y en todo caso dentro de un plazo máximo de 7 días— todos los datos de la API de Meta</strong> almacenados localmente, junto con los tokens y puntos de control del almacén seguro. Al desconectar, además, Publisher solicita a Meta revocar los permisos concedidos.</li>
+<li><strong>Hechos locales y <em>tombstones</em>:</strong> se conservan únicamente hechos locales propios (hashes SHA-256, marcas de tiempo, aprobaciones, aceptaciones legales y un registro <em>tombstone</em> sin identificadores ni valores de Meta) para mantener la trazabilidad interna e impedir que un mismo video se reenvíe por accidente.</li>
+</ol>
+<h2>11. Cómo solicitar el borrado de datos de Facebook</h2>
+<p>En cualquier momento, el usuario puede pulsar el botón visible <strong>«Borrar datos de Facebook»</strong> en la sección de cuentas/datos de la interfaz local de Publisher (o desconectar la cuenta). Esta acción purga de inmediato todos los registros de <code>ProviderApiData</code> de Facebook y limpia los valores remotos almacenados en este equipo. El responsable de la instalación (contacto en la sección 1) atiende también cualquier solicitud de borrado recibida de Meta o de una persona usuaria.</p>
+<blockquote>
+<p><strong>Importante:</strong> borrar los datos locales en Señal Residual Publisher <strong>no borra los videos, Reels ni publicaciones de la Página alojados en Facebook</strong>. Para modificarlos o eliminarlos, utilice directamente Facebook.</p>
+</blockquote>
+<h2>12. Cómo revocar el acceso de Publisher a su cuenta de Facebook</h2>
+<p>Además de la opción de desconexión dentro de Publisher, puede quitar la app en Facebook desde <strong>Configuración y privacidad › Configuración › Apps y sitios web</strong>, donde también puede enviar una solicitud de eliminación de sus datos.</p>
+</article></main><footer>Señal Residual Publisher · Documentación legal</footer></body></html>
